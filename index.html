@@ -1,0 +1,937 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101020">
+<meta name="description" content="تعارف - اكتشف أصدقاء جدد من الدول العربية">
+<title>TAARUF - تعارف</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #101020;
+    color: white;
+    line-height: 1.8;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.header {
+    background: #19192e;
+    border-bottom: 1px solid #353550;
+    padding: 15px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo span {
+    color: #ae83ff;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav a {
+    color: #d0c9df;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 9px;
+}
+
+.login-btn, .register-btn {
+    padding: 9px 17px;
+    border-radius: 9px;
+    color: white;
+}
+
+.login-btn {
+    background: #30304b;
+}
+
+.register-btn {
+    background: #8054dc;
+}
+
+.hero {
+    min-height: 570px;
+    padding: 65px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background:
+    radial-gradient(circle at 80% 30%, #43276b 0, transparent 38%),
+    linear-gradient(135deg, #19192e, #101020);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.tag {
+    display: inline-block;
+    background: #302247;
+    color: #d7baff;
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(37px, 6vw, 58px);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #b28aff;
+}
+
+.hero p {
+    color: #c5c1d3;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #a16df2, #7044c9);
+    color: white;
+}
+
+.secondary-btn {
+    background: #292943;
+    color: white;
+    border: 1px solid #494965;
+}
+
+.hero-art {
+    width: 270px;
+    height: 270px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid #a77aff55;
+    box-shadow: 0 0 70px #854de533;
+}
+
+.art-card {
+    width: 195px;
+    height: 215px;
+    border-radius: 25px;
+    background: linear-gradient(145deg, #49316b, #211d3a);
+    border: 1px solid #b28aff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-5deg);
+    box-shadow: 0 15px 40px #0007;
+}
+
+.art-heart {
+    font-size: 65px;
+}
+
+.art-card h2 {
+    font-size: 27px;
+}
+
+.art-card p {
+    font-size: 13px;
+    color: #d0b9ee;
+    margin: 0;
+}
+
+.trust {
+    color: #b8a8d3;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+.features {
+    padding: 75px 7%;
+    background: #141427;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading span {
+    color: #b28aff;
+}
+
+.heading h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.heading p {
+    color: #aaaac0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    padding: 25px 20px;
+    background: #202039;
+    border: 1px solid #373751;
+    border-radius: 16px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #a77aff;
+}
+
+.card-icon {
+    font-size: 37px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #b9b7c9;
+    font-size: 14px;
+}
+
+.about {
+    padding: 65px 8%;
+    text-align: center;
+    background: linear-gradient(135deg, #30204b, #19192e);
+}
+
+.about h2 {
+    font-size: 29px;
+    margin-bottom: 15px;
+}
+
+.about p {
+    color: #d0c7df;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+footer {
+    background: #0b0b17;
+    padding: 35px 15px;
+    text-align: center;
+    color: #aaaac0;
+}
+
+footer strong {
+    color: #b28aff;
+    font-size: 25px;
+}
+
+footer p {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: #000c;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    background: #202039;
+    border: 1px solid #66518a;
+    border-radius: 20px;
+    padding: 25px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    color: white;
+    background: none;
+    font-size: 30px;
+}
+
+.modal-box h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.modal-desc {
+    text-align: center;
+    color: #aaaac0;
+    margin-bottom: 15px;
+}
+
+.field {
+    margin-top: 13px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #d5c8ea;
+    font-size: 14px;
+}
+
+.field input, .field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #494965;
+    border-radius: 9px;
+    background: #111124;
+    color: white;
+    outline: none;
+}
+
+.field input:focus, .field select:focus {
+    border-color: #a77aff;
+}
+
+.terms {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.terms input {
+    width: auto;
+}
+
+.submit {
+    width: 100%;
+    padding: 13px;
+    border-radius: 9px;
+    background: #8556df;
+    color: white;
+    margin-top: 18px;
+}
+
+.submit:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.switch {
+    text-align: center;
+    margin-top: 15px;
+    color: #bbb;
+    font-size: 13px;
+}
+
+.switch button {
+    color: #b28aff;
+    background: none;
+}
+
+.message {
+    color: #ffc1c1;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    overflow-wrap: anywhere;
+}
+
+.message.success {
+    color: #9de9bd;
+}
+
+@media(max-width: 700px) {
+    .header {
+        justify-content: space-between;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 16px;
+        font-size: 13px;
+    }
+
+    .header-buttons button {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 45px 6%;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-art {
+        width: 230px;
+        height: 230px;
+    }
+
+    .art-card {
+        width: 165px;
+        height: 180px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        padding: 55px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">تعارف<span>.</span></div>
+
+    <nav class="nav">
+        <a href="#home">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#about">عن الموقع</a>
+    </nav>
+
+    <div class="header-buttons">
+        <button class="login-btn" onclick="openAuth('login')">دخول</button>
+        <button class="register-btn" onclick="openAuth('register')">إنشاء حساب</button>
+    </div>
+</header>
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="tag">💜 أهلاً بك في عالم تعارف</div>
+
+        <h1>
+            أصدقاء جدد<br>
+            <span>وحكايات جميلة</span>
+        </h1>
+
+        <p>
+            اكتشف أشخاصاً جدد من جميع الدول العربية.
+            تحدث وتعارف وابدأ صداقات جديدة من خلال
+            الرسائل والمكالمات الصوتية والمرئية.
+        </p>
+
+        <div class="hero-actions">
+            <button class="primary-btn" onclick="openAuth('register')">
+                ابدأ التعارف الآن
+            </button>
+
+            <button class="secondary-btn" onclick="scrollToFeatures()">
+                اكتشف المميزات
+            </button>
+        </div>
+
+        <div class="trust">🔒 خصوصيتك وأمانك مهمان لدينا</div>
+
+    </div>
+
+    <div class="hero-art">
+        <div class="art-card">
+            <div class="art-heart">💜</div>
+            <h2>تعارف</h2>
+            <p>العالم أقرب مما تتخيل</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="features" id="features">
+
+    <div class="heading">
+        <span>اكتشف عالمنا</span>
+        <h2>كل ما تحتاجه للتواصل</h2>
+        <p>تجربة اجتماعية تجمع الأشخاص في مكان واحد</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>اكتشاف الأشخاص</h3>
+            <p>اكتشف أشخاصاً جدد من مختلف الدول العربية.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💬</div>
+            <h3>المحادثات</h3>
+            <p>تواصل مع أصدقائك وتبادل الرسائل.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📹</div>
+            <h3>مكالمات الفيديو</h3>
+            <p>مكالمات مرئية مع الأشخاص الذين يقبلون التواصل.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🎙️</div>
+            <h3>المكالمات الصوتية</h3>
+            <p>تواصل صوتياً مع أصدقائك.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌍</div>
+            <h3>الدول العربية</h3>
+            <p>تعرف على أشخاص من أنحاء العالم العربي.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>الحماية والخصوصية</h3>
+            <p>أدوات للحظر والإبلاغ وحماية الحسابات.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="about" id="about">
+    <h2>عالم جديد من الصداقات</h2>
+    <p>
+        تعارف مساحة اجتماعية للبالغين،
+        تتيح إنشاء ملفات شخصية واكتشاف أشخاص جدد
+        والتواصل معهم باحترام وأمان.
+    </p>
+
+    <button class="primary-btn" onclick="openAuth('register')">
+        انضم إلينا
+    </button>
+</section>
+
+<footer>
+    <strong>TAARUF</strong>
+    <p>تعارف - أصدقاء جدد وحكايات جميلة</p>
+    <p>© 2026 جميع الحقوق محفوظة</p>
+</footer>
+
+<div class="modal" id="authModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeAuth()">×</button>
+
+        <h2 id="modalTitle">إنشاء حساب جديد</h2>
+        <p class="modal-desc" id="modalDesc">انضم إلى مجتمع تعارف</p>
+
+        <form id="authForm">
+
+            <div class="field" id="nameField">
+                <label>الاسم</label>
+                <input id="userName" type="text"
+                       placeholder="اكتب اسمك" maxlength="40">
+            </div>
+
+            <div class="field" id="ageField">
+                <label>العمر</label>
+                <input id="userAge" type="number"
+                       placeholder="18 عاماً أو أكثر" min="18" max="100">
+            </div>
+
+            <div class="field" id="countryField">
+                <label>الدولة</label>
+                <select id="userCountry">
+                    <option value="">اختر دولتك</option>
+                    <option>اليمن</option>
+                    <option>السعودية</option>
+                    <option>مصر</option>
+                    <option>الإمارات</option>
+                    <option>الأردن</option>
+                    <option>العراق</option>
+                    <option>عمان</option>
+                    <option>الكويت</option>
+                    <option>قطر</option>
+                    <option>البحرين</option>
+                    <option>لبنان</option>
+                    <option>سوريا</option>
+                    <option>فلسطين</option>
+                    <option>المغرب</option>
+                    <option>الجزائر</option>
+                    <option>تونس</option>
+                    <option>ليبيا</option>
+                    <option>السودان</option>
+                    <option>موريتانيا</option>
+                    <option>الصومال</option>
+                    <option>جيبوتي</option>
+                    <option>جزر القمر</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>البريد الإلكتروني</label>
+                <input id="userEmail" type="email"
+                       placeholder="example@email.com"
+                       autocomplete="email" required>
+            </div>
+
+            <div class="field">
+                <label>كلمة المرور</label>
+                <input id="userPassword" type="password"
+                       placeholder="8 أحرف على الأقل"
+                       minlength="8" autocomplete="new-password" required>
+            </div>
+
+            <div class="terms" id="termsField">
+                <label>
+                    <input id="agreeTerms" type="checkbox">
+                    أوافق على شروط الاستخدام والخصوصية.
+                </label>
+            </div>
+
+            <button class="submit" id="submitBtn" type="submit">
+                إنشاء الحساب
+            </button>
+
+        </form>
+
+        <div class="switch">
+            <span id="switchText">لديك حساب بالفعل؟</span>
+            <button id="switchBtn" type="button" onclick="switchAuth()">
+                تسجيل الدخول
+            </button>
+        </div>
+
+        <div class="message" id="message"></div>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    sendEmailVerification
+}
+from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDo1nZdpiUsx3glVHUf3o0Yqfq9spZD4Gs",
+    authDomain: "taaruf-72985.firebaseapp.com",
+    projectId: "taaruf-72985",
+    storageBucket: "taaruf-72985.firebasestorage.app",
+    messagingSenderId: "162693881912",
+    appId: "1:162693881912:web:6f1c6d768b47c498adc6cd"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let mode = "register";
+
+const modal = document.getElementById("authModal");
+const authForm = document.getElementById("authForm");
+
+function showMessage(text, success = false) {
+    const message = document.getElementById("message");
+    message.textContent = text;
+    message.classList.toggle("success", success);
+}
+
+function openAuth(type) {
+    mode = type;
+    updateAuth();
+    modal.classList.add("active");
+}
+
+function closeAuth() {
+    modal.classList.remove("active");
+    authForm.reset();
+    showMessage("");
+}
+
+function switchAuth() {
+    mode = mode === "register" ? "login" : "register";
+    updateAuth();
+}
+
+function updateAuth() {
+
+    const registering = mode === "register";
+
+    document.getElementById("modalTitle").textContent =
+        registering ? "إنشاء حساب جديد" : "تسجيل الدخول";
+
+    document.getElementById("modalDesc").textContent =
+        registering ? "انضم إلى مجتمع تعارف" : "مرحباً بعودتك";
+
+    ["nameField", "ageField", "countryField", "termsField"].forEach(id => {
+        document.getElementById(id).style.display =
+            registering ? "block" : "none";
+    });
+
+    document.getElementById("userName").required = registering;
+    document.getElementById("userAge").required = registering;
+    document.getElementById("userCountry").required = registering;
+    document.getElementById("agreeTerms").required = registering;
+
+    document.getElementById("userPassword").autocomplete =
+        registering ? "new-password" : "current-password";
+
+    document.getElementById("submitBtn").textContent =
+        registering ? "إنشاء الحساب" : "دخول";
+
+    document.getElementById("switchText").textContent =
+        registering ? "لديك حساب بالفعل؟" : "ليس لديك حساب؟";
+
+    document.getElementById("switchBtn").textContent =
+        registering ? "تسجيل الدخول" : "إنشاء حساب";
+
+    showMessage("");
+}
+
+function scrollToFeatures() {
+    document.getElementById("features").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function getFirebaseError(error) {
+
+    const code = error.code || "";
+
+    const errors = {
+        "auth/email-already-in-use":
+            "هذا البريد الإلكتروني مسجل بالفعل.",
+
+        "auth/invalid-email":
+            "البريد الإلكتروني غير صحيح.",
+
+        "auth/weak-password":
+            "كلمة المرور ضعيفة. استخدم 8 أحرف أو أكثر.",
+
+        "auth/user-not-found":
+            "لا يوجد حساب بهذا البريد الإلكتروني.",
+
+        "auth/wrong-password":
+            "كلمة المرور غير صحيحة.",
+
+        "auth/invalid-credential":
+            "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+
+        "auth/too-many-requests":
+            "محاولات كثيرة. حاول مرة أخرى لاحقاً.",
+
+        "auth/network-request-failed":
+            "تحقق من اتصال الإنترنت وحاول مرة أخرى.",
+
+        "auth/operation-not-allowed":
+            "يجب تفعيل تسجيل الدخول بالبريد وكلمة المرور من Firebase."
+    };
+
+    return errors[code] || "حدث خطأ: " + (error.message || code);
+}
+
+authForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("userEmail").value.trim();
+    const password = document.getElementById("userPassword").value;
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (!email || !password) {
+        showMessage("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+        return;
+    }
+
+    if (password.length < 8) {
+        showMessage("كلمة المرور يجب أن تكون 8 أحرف على الأقل.");
+        return;
+    }
+
+    if (mode === "register") {
+
+        const name = document.getElementById("userName").value.trim();
+        const age = Number(document.getElementById("userAge").value);
+        const country = document.getElementById("userCountry").value;
+        const terms = document.getElementById("agreeTerms").checked;
+
+        if (!name || !country) {
+            showMessage("يرجى تعبئة الاسم والدولة.");
+            return;
+        }
+
+        if (!Number.isInteger(age) || age < 18 || age > 100) {
+            showMessage("التسجيل متاح للبالغين 18 عاماً فما فوق.");
+            return;
+        }
+
+        if (!terms) {
+            showMessage("يرجى الموافقة على شروط الاستخدام.");
+            return;
+        }
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "يرجى الانتظار...";
+
+    try {
+
+        if (mode === "register") {
+
+            const name = document.getElementById("userName").value.trim();
+
+            const result = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            await updateProfile(result.user, {
+                displayName: name
+            });
+
+            await sendEmailVerification(result.user);
+
+            showMessage(
+                "تم إنشاء حسابك بنجاح. أرسلنا رسالة تحقق إلى بريدك الإلكتروني. افتح بريدك واضغط رابط التحقق.",
+                true
+            );
+
+            authForm.reset();
+
+        } else {
+
+            const result = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            if (!result.user.emailVerified) {
+                showMessage(
+                    "يجب تأكيد بريدك الإلكتروني أولاً. تحقق من صندوق الوارد أو الرسائل غير المرغوب فيها."
+                );
+
+                await sendEmailVerification(result.user);
+                return;
+            }
+
+            showMessage(
+                "تم تسجيل الدخول بنجاح. أهلاً بك في تعارف!",
+                true
+            );
+        }
+
+    } catch (error) {
+
+        showMessage(getFirebaseError(error));
+
+    } finally {
+
+        submitBtn.disabled = false;
+        submitBtn.textContent =
+            mode === "register" ? "إنشاء الحساب" : "دخول";
+    }
+
+});
+
+modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        closeAuth();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeAuth();
+    }
+});
+
+window.openAuth = openAuth;
+window.closeAuth = closeAuth;
+window.switchAuth = switchAuth;
+window.scrollToFeatures = scrollToFeatures;
+
+updateAuth();
+
+</script>
+
+</body>
+</html>
