@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -30,6 +29,11 @@ button {
     border: none;
     cursor: pointer;
     font-family: inherit;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: wait;
 }
 
 .header {
@@ -91,8 +95,8 @@ button {
     justify-content: space-between;
     gap: 30px;
     background:
-    radial-gradient(circle at 80% 30%, #43276b 0, transparent 38%),
-    linear-gradient(135deg, #19192e, #101020);
+        radial-gradient(circle at 80% 30%, #43276b 0, transparent 38%),
+        linear-gradient(135deg, #19192e, #101020);
 }
 
 .hero-content {
@@ -342,7 +346,8 @@ footer p {
     font-size: 14px;
 }
 
-.field input, .field select {
+.field input,
+.field select {
     width: 100%;
     padding: 12px;
     border: 1px solid #494965;
@@ -352,7 +357,8 @@ footer p {
     outline: none;
 }
 
-.field input:focus, .field select:focus {
+.field input:focus,
+.field select:focus {
     border-color: #a77aff;
 }
 
@@ -436,6 +442,123 @@ footer p {
     margin-top: 12px;
 }
 
+/* صفحة اكتشاف الأعضاء */
+.members-page {
+    display: none;
+    padding: 35px 6%;
+    min-height: 70vh;
+}
+
+.members-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.members-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.members-header h2 {
+    color: #b28aff;
+    font-size: 30px;
+}
+
+.members-header p {
+    color: #aaaac0;
+}
+
+.members-tools {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.members-search {
+    flex: 1;
+    min-width: 200px;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #494965;
+    background: #111124;
+    color: white;
+    font-family: inherit;
+    outline: none;
+}
+
+.members-search:focus {
+    border-color: #a77aff;
+}
+
+.members-refresh {
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #8054dc;
+    color: white;
+}
+
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.member-card {
+    background: #202039;
+    border: 1px solid #373751;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.member-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a16df2, #7044c9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 auto 12px;
+}
+
+.member-card h3 {
+    color: white;
+    font-size: 18px;
+    overflow-wrap: anywhere;
+}
+
+.member-info {
+    color: #b9b7c9;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.members-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #aaaac0;
+    padding: 35px 15px;
+    background: #202039;
+    border-radius: 15px;
+    border: 1px solid #373751;
+}
+
+.members-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.members-actions button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+}
+
 @media(max-width: 700px) {
     .header {
         justify-content: space-between;
@@ -485,13 +608,21 @@ footer p {
     .features {
         padding: 55px 6%;
     }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .members-page {
+        padding: 25px 5%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<header class="header" id="siteHeader">
     <div class="logo">تعارف<span>.</span></div>
 
     <nav class="nav">
@@ -507,9 +638,7 @@ footer p {
 </header>
 
 <section class="hero" id="home">
-
     <div class="hero-content">
-
         <div class="tag">💜 أهلاً بك في عالم تعارف</div>
 
         <h1>
@@ -534,7 +663,6 @@ footer p {
         </div>
 
         <div class="trust">🔒 خصوصيتك وأمانك مهمان لدينا</div>
-
     </div>
 
     <div class="hero-art">
@@ -544,11 +672,9 @@ footer p {
             <p>العالم أقرب مما تتخيل</p>
         </div>
     </div>
-
 </section>
 
 <section class="features" id="features">
-
     <div class="heading">
         <span>اكتشف عالمنا</span>
         <h2>كل ما تحتاجه للتواصل</h2>
@@ -556,7 +682,6 @@ footer p {
     </div>
 
     <div class="cards">
-
         <div class="card">
             <div class="card-icon">👥</div>
             <h3>اكتشاف الأشخاص</h3>
@@ -592,9 +717,7 @@ footer p {
             <h3>الحماية والخصوصية</h3>
             <p>أدوات للحظر والإبلاغ وحماية الحسابات.</p>
         </div>
-
     </div>
-
 </section>
 
 <section class="about" id="about">
@@ -620,9 +743,7 @@ footer p {
 <section class="profile-page" id="profilePage">
     <div class="profile-card">
         <h2>ملفي الشخصي</h2>
-        <p class="profile-desc">
-            أهلاً بك في مجتمع تعارف
-        </p>
+        <p class="profile-desc">أهلاً بك في مجتمع تعارف</p>
 
         <div class="field">
             <label for="profileName">الاسم</label>
@@ -678,17 +799,61 @@ footer p {
     </div>
 </section>
 
+<!-- صفحة اكتشاف الأعضاء -->
+<section class="members-page" id="membersPage">
+    <div class="members-container">
+
+        <div class="members-header">
+            <h2>اكتشف الأعضاء</h2>
+            <p>تعرف على أشخاص جدد من مختلف الدول العربية</p>
+        </div>
+
+        <div class="members-tools">
+            <input
+                class="members-search"
+                id="membersSearch"
+                type="search"
+                placeholder="ابحث بالاسم أو الدولة..."
+                autocomplete="off">
+
+            <button class="members-refresh"
+                    id="membersRefreshBtn"
+                    type="button">
+                تحديث
+            </button>
+        </div>
+
+        <div class="message" id="membersMessage"></div>
+
+        <div class="members-grid" id="membersGrid">
+            <div class="members-empty">جارٍ تحميل الأعضاء...</div>
+        </div>
+
+        <div class="members-actions">
+            <button class="secondary-btn"
+                    type="button"
+                    onclick="editMyProfile()">
+                تعديل ملفي
+            </button>
+
+            <button class="secondary-btn"
+                    type="button"
+                    onclick="logoutUser()">
+                تسجيل الخروج
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- نافذة التسجيل والدخول -->
 <div class="modal" id="authModal">
-
     <div class="modal-box">
-
         <button class="close" onclick="closeAuth()">×</button>
 
         <h2 id="modalTitle">إنشاء حساب جديد</h2>
         <p class="modal-desc" id="modalDesc">انضم إلى مجتمع تعارف</p>
 
         <form id="authForm">
-
             <div class="field" id="nameField">
                 <label>الاسم</label>
                 <input id="userName" type="text"
@@ -698,7 +863,8 @@ footer p {
             <div class="field" id="ageField">
                 <label>العمر</label>
                 <input id="userAge" type="number"
-                       placeholder="18 عاماً أو أكثر" min="18" max="100">
+                       placeholder="18 عاماً أو أكثر"
+                       min="18" max="100">
             </div>
 
             <div class="field" id="countryField">
@@ -754,7 +920,6 @@ footer p {
             <button class="submit" id="submitBtn" type="submit">
                 إنشاء الحساب
             </button>
-
         </form>
 
         <div class="switch">
@@ -765,9 +930,7 @@ footer p {
         </div>
 
         <div class="message" id="message"></div>
-
     </div>
-
 </div>
 
 <script type="module">
@@ -791,6 +954,8 @@ import {
     doc,
     getDoc,
     setDoc,
+    collection,
+    getDocs,
     serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
@@ -809,22 +974,46 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let mode = "register";
+let allMembers = [];
+let profileLoadId = 0;
 
 const modal = document.getElementById("authModal");
 const authForm = document.getElementById("authForm");
 
 const profilePage = document.getElementById("profilePage");
+const membersPage = document.getElementById("membersPage");
+
 const profileName = document.getElementById("profileName");
 const profileAge = document.getElementById("profileAge");
 const profileCountry = document.getElementById("profileCountry");
 const profileMessage = document.getElementById("profileMessage");
 const saveProfileBtn = document.getElementById("saveProfileBtn");
 
+const membersGrid = document.getElementById("membersGrid");
+const membersSearch = document.getElementById("membersSearch");
+const membersMessage = document.getElementById("membersMessage");
+const membersRefreshBtn = document.getElementById("membersRefreshBtn");
+
+const header = document.getElementById("siteHeader");
+const hero = document.querySelector(".hero");
+const features = document.querySelector(".features");
+const about = document.querySelector(".about");
+const footer = document.querySelector("footer");
+
+/* الرسائل */
+
 function showMessage(text, success = false) {
     const message = document.getElementById("message");
     message.textContent = text;
     message.classList.toggle("success", success);
 }
+
+function showProfileMessage(text, success = false) {
+    profileMessage.textContent = text;
+    profileMessage.classList.toggle("success", success);
+}
+
+/* نافذة التسجيل */
 
 function openAuth(type) {
     mode = type;
@@ -844,7 +1033,6 @@ function switchAuth() {
 }
 
 function updateAuth() {
-
     const registering = mode === "register";
 
     document.getElementById("modalTitle").textContent =
@@ -879,13 +1067,12 @@ function updateAuth() {
 }
 
 function scrollToFeatures() {
-    document.getElementById("features").scrollIntoView({
-        behavior: "smooth"
-    });
+    features.scrollIntoView({ behavior: "smooth" });
 }
 
-function getFirebaseError(error) {
+/* رسائل أخطاء Firebase */
 
+function getFirebaseError(error) {
     const code = error.code || "";
 
     const errors = {
@@ -920,39 +1107,92 @@ function getFirebaseError(error) {
     return errors[code] || "حدث خطأ: " + (error.message || code);
 }
 
-/* إظهار وإخفاء صفحات الموقع */
+/* إظهار صفحات الموقع */
 
 function showProfilePage() {
-    document.querySelector(".header").style.display = "none";
-    document.querySelector(".hero").style.display = "none";
-    document.querySelector(".features").style.display = "none";
-    document.querySelector(".about").style.display = "none";
-    document.querySelector("footer").style.display = "none";
+    header.style.display = "none";
+    hero.style.display = "none";
+    features.style.display = "none";
+    about.style.display = "none";
+    footer.style.display = "none";
 
     profilePage.style.display = "block";
+    membersPage.style.display = "none";
+}
+
+function showMembersPage() {
+    header.style.display = "none";
+    hero.style.display = "none";
+    features.style.display = "none";
+    about.style.display = "none";
+    footer.style.display = "none";
+
+    profilePage.style.display = "none";
+    membersPage.style.display = "block";
 }
 
 function showHomePage() {
-    document.querySelector(".header").style.display = "";
-    document.querySelector(".hero").style.display = "";
-    document.querySelector(".features").style.display = "";
-    document.querySelector(".about").style.display = "";
-    document.querySelector("footer").style.display = "";
+    header.style.display = "";
+    hero.style.display = "";
+    features.style.display = "";
+    about.style.display = "";
+    footer.style.display = "";
 
     profilePage.style.display = "none";
+    membersPage.style.display = "none";
 }
 
-/* تحميل الملف الشخصي من Firestore */
+/* حفظ الملف الخاص والعام */
+
+async function savePrivateProfile(user, name, age, country, isNew = false) {
+    const profileData = {
+        name: name,
+        age: age,
+        country: country,
+        email: user.email,
+        updatedAt: serverTimestamp()
+    };
+
+    if (isNew) {
+        profileData.createdAt = serverTimestamp();
+    }
+
+    await setDoc(doc(db, "users", user.uid), profileData, {
+        merge: true
+    });
+}
+
+async function savePublicProfile(user, name, age, country, isNew = false) {
+    const publicData = {
+        uid: user.uid,
+        name: name,
+        age: age,
+        country: country,
+        updatedAt: serverTimestamp()
+    };
+
+    if (isNew) {
+        publicData.createdAt = serverTimestamp();
+    }
+
+    await setDoc(doc(db, "publicProfiles", user.uid), publicData, {
+        merge: true
+    });
+}
+
+/* تحميل الملف الشخصي */
 
 async function loadUserProfile(user) {
-    showProfilePage();
+    const thisLoad = ++profileLoadId;
 
-    profileMessage.textContent = "جارٍ تحميل بيانات الملف الشخصي...";
-    profileMessage.classList.remove("success");
+    showProfilePage();
+    showProfileMessage("جارٍ تحميل بيانات الملف الشخصي...");
 
     try {
         const profileRef = doc(db, "users", user.uid);
         const profileSnapshot = await getDoc(profileRef);
+
+        if (thisLoad !== profileLoadId) return;
 
         if (profileSnapshot.exists()) {
             const data = profileSnapshot.data();
@@ -961,28 +1201,61 @@ async function loadUserProfile(user) {
             profileAge.value = data.age || "";
             profileCountry.value = data.country || "";
 
-            profileMessage.textContent =
-                "يمكنك تعديل بياناتك ثم الضغط على حفظ.";
+            const name = String(data.name || "").trim();
+            const age = Number(data.age);
+            const country = String(data.country || "").trim();
+
+            const complete =
+                name.length >= 2 &&
+                Number.isInteger(age) &&
+                age >= 18 &&
+                age <= 100 &&
+                country.length > 0;
+
+            if (complete) {
+                /*
+                 * مزامنة الحسابات القديمة إلى publicProfiles.
+                 * لا نرسل البريد الإلكتروني إلى الملف العام.
+                 */
+                try {
+                    await savePublicProfile(user, name, age, country);
+                } catch (publicError) {
+                    console.error("Public profile sync error:", publicError);
+                }
+
+                if (thisLoad !== profileLoadId) return;
+
+                showMembersPage();
+                await loadMembers();
+                return;
+            }
+
+            showProfileMessage(
+                "أكمل بيانات ملفك الشخصي ثم اضغط حفظ."
+            );
 
         } else {
-            // الحسابات القديمة التي لم تحفظ بياناتها في Firestore
             profileName.value = user.displayName || "";
             profileAge.value = "";
             profileCountry.value = "";
 
-            profileMessage.textContent =
-                "أكمل بيانات ملفك الشخصي ثم اضغط حفظ.";
+            showProfileMessage(
+                "أكمل بيانات ملفك الشخصي ثم اضغط حفظ."
+            );
         }
 
     } catch (error) {
         console.error("Profile loading error:", error);
 
+        if (thisLoad !== profileLoadId) return;
+
         profileName.value = user.displayName || "";
         profileAge.value = "";
         profileCountry.value = "";
 
-        profileMessage.textContent =
-            "تعذر تحميل البيانات. يمكنك إدخال بياناتك ثم حفظها.";
+        showProfileMessage(
+            "تعذر تحميل البيانات. أدخل بياناتك ثم اضغط حفظ."
+        );
     }
 }
 
@@ -992,8 +1265,9 @@ saveProfileBtn.addEventListener("click", async function() {
     const user = auth.currentUser;
 
     if (!user || !user.emailVerified) {
-        profileMessage.textContent =
-            "يرجى تسجيل الدخول والتحقق من البريد الإلكتروني أولاً.";
+        showProfileMessage(
+            "يرجى تسجيل الدخول والتحقق من البريد الإلكتروني أولاً."
+        );
         return;
     }
 
@@ -1002,51 +1276,49 @@ saveProfileBtn.addEventListener("click", async function() {
     const country = profileCountry.value;
 
     if (!name || name.length < 2) {
-        profileMessage.textContent = "يرجى إدخال اسم صحيح.";
+        showProfileMessage("يرجى إدخال اسم صحيح.");
         return;
     }
 
     if (!Number.isInteger(age) || age < 18 || age > 100) {
-        profileMessage.textContent =
-            "العمر يجب أن يكون بين 18 و100 سنة.";
+        showProfileMessage("العمر يجب أن يكون بين 18 و100 سنة.");
         return;
     }
 
     if (!country) {
-        profileMessage.textContent = "يرجى اختيار الدولة.";
+        showProfileMessage("يرجى اختيار الدولة.");
         return;
     }
 
     saveProfileBtn.disabled = true;
     saveProfileBtn.textContent = "جارٍ الحفظ...";
-
     profileMessage.classList.remove("success");
 
     try {
-        await setDoc(doc(db, "users", user.uid), {
-            name: name,
-            age: age,
-            country: country,
-            email: user.email,
-            updatedAt: serverTimestamp()
-        }, {
-            merge: true
-        });
+        await savePrivateProfile(user, name, age, country);
 
         await updateProfile(user, {
             displayName: name
         });
 
-        profileMessage.textContent =
-            "تم حفظ ملفك الشخصي بنجاح.";
-        profileMessage.classList.add("success");
+        /*
+         * حفظ بيانات العرض العامة.
+         * الحقول العامة لا تحتوي على البريد الإلكتروني.
+         */
+        await savePublicProfile(user, name, age, country);
+
+        showProfileMessage("تم حفظ ملفك الشخصي بنجاح.", true);
+
+        showMembersPage();
+        membersSearch.value = "";
+        await loadMembers();
 
     } catch (error) {
         console.error("Profile save error:", error);
 
-        profileMessage.textContent =
-            "تعذر الحفظ. تحقق من اتصال الإنترنت وإعدادات Firestore.";
-        profileMessage.classList.remove("success");
+        showProfileMessage(
+            "تعذر الحفظ. تحقق من اتصال الإنترنت وقواعد Firestore."
+        );
 
     } finally {
         saveProfileBtn.disabled = false;
@@ -1054,10 +1326,175 @@ saveProfileBtn.addEventListener("click", async function() {
     }
 });
 
+/* تعديل الملف الشخصي من صفحة الأعضاء */
+
+function editMyProfile() {
+    const user = auth.currentUser;
+
+    if (!user || !user.emailVerified) {
+        showHomePage();
+        return;
+    }
+
+    showProfilePage();
+    showProfileMessage("يمكنك تعديل بياناتك ثم الضغط على حفظ.");
+}
+
+window.editMyProfile = editMyProfile;
+
+/* تحميل قائمة الأعضاء */
+
+async function loadMembers() {
+    const user = auth.currentUser;
+
+    if (!user || !user.emailVerified) {
+        showHomePage();
+        return;
+    }
+
+    membersRefreshBtn.disabled = true;
+    membersRefreshBtn.textContent = "جارٍ التحديث...";
+    membersMessage.textContent = "";
+    membersMessage.classList.remove("success");
+
+    membersGrid.innerHTML = "";
+
+    const loading = document.createElement("div");
+    loading.className = "members-empty";
+    loading.textContent = "جارٍ تحميل الأعضاء...";
+    membersGrid.appendChild(loading);
+
+    try {
+        const snapshot = await getDocs(collection(db, "publicProfiles"));
+
+        allMembers = [];
+
+        snapshot.forEach(function(documentSnapshot) {
+            const data = documentSnapshot.data();
+
+            if (data.uid === user.uid) {
+                return;
+            }
+
+            const name = String(data.name || "").trim();
+            const age = Number(data.age);
+            const country = String(data.country || "").trim();
+
+            if (
+                name.length < 2 ||
+                !Number.isInteger(age) ||
+                age < 18 ||
+                age > 100 ||
+                !country
+            ) {
+                return;
+            }
+
+            allMembers.push({
+                uid: data.uid || documentSnapshot.id,
+                name: name,
+                age: age,
+                country: country
+            });
+        });
+
+        allMembers.sort(function(a, b) {
+            return a.name.localeCompare(b.name, "ar");
+        });
+
+        renderMembers();
+
+    } catch (error) {
+        console.error("Members loading error:", error);
+
+        membersGrid.innerHTML = "";
+
+        const errorBox = document.createElement("div");
+        errorBox.className = "members-empty";
+        errorBox.textContent =
+            "تعذر تحميل الأعضاء. تحقق من قواعد Firestore واتصال الإنترنت.";
+
+        membersGrid.appendChild(errorBox);
+
+    } finally {
+        membersRefreshBtn.disabled = false;
+        membersRefreshBtn.textContent = "تحديث";
+    }
+}
+
+/* عرض الأعضاء مع البحث */
+
+function renderMembers() {
+    const searchText = membersSearch.value.trim().toLowerCase();
+
+    const filteredMembers = allMembers.filter(function(member) {
+        return (
+            member.name.toLowerCase().includes(searchText) ||
+            member.country.toLowerCase().includes(searchText)
+        );
+    });
+
+    membersGrid.innerHTML = "";
+
+    if (filteredMembers.length === 0) {
+        const emptyBox = document.createElement("div");
+        emptyBox.className = "members-empty";
+
+        emptyBox.textContent = searchText
+            ? "لم نجد أعضاء يطابقون بحثك."
+            : "لا يوجد أعضاء آخرون بعد. شارك الموقع مع أصدقائك.";
+
+        membersGrid.appendChild(emptyBox);
+        return;
+    }
+
+    filteredMembers.forEach(function(member) {
+        const card = document.createElement("div");
+        card.className = "member-card";
+
+        const avatar = document.createElement("div");
+        avatar.className = "member-avatar";
+        avatar.textContent = member.name.charAt(0);
+
+        const name = document.createElement("h3");
+        name.textContent = member.name;
+
+        const age = document.createElement("div");
+        age.className = "member-info";
+        age.textContent = member.age + " سنة";
+
+        const country = document.createElement("div");
+        country.className = "member-info";
+        country.textContent = "🌍 " + member.country;
+
+        card.appendChild(avatar);
+        card.appendChild(name);
+        card.appendChild(age);
+        card.appendChild(country);
+
+        membersGrid.appendChild(card);
+    });
+}
+
+/* البحث الفوري */
+
+membersSearch.addEventListener("input", function() {
+    renderMembers();
+});
+
+/* تحديث قائمة الأعضاء */
+
+membersRefreshBtn.addEventListener("click", function() {
+    loadMembers();
+});
+
 /* تسجيل الخروج */
 
 async function logoutUser() {
     try {
+        profileLoadId++;
+        allMembers = [];
+
         await signOut(auth);
         showHomePage();
 
@@ -1067,7 +1504,7 @@ async function logoutUser() {
         });
 
     } catch (error) {
-        profileMessage.textContent = "تعذر تسجيل الخروج.";
+        showProfileMessage("تعذر تسجيل الخروج.");
     }
 }
 
@@ -1076,7 +1513,6 @@ window.logoutUser = logoutUser;
 /* التسجيل وتسجيل الدخول */
 
 authForm.addEventListener("submit", async function(event) {
-
     event.preventDefault();
 
     const email = document.getElementById("userEmail").value.trim();
@@ -1094,14 +1530,13 @@ authForm.addEventListener("submit", async function(event) {
     }
 
     if (mode === "register") {
-
         const name = document.getElementById("userName").value.trim();
         const age = Number(document.getElementById("userAge").value);
         const country = document.getElementById("userCountry").value;
         const terms = document.getElementById("agreeTerms").checked;
 
-        if (!name || !country) {
-            showMessage("يرجى تعبئة الاسم والدولة.");
+        if (!name || name.length < 2 || !country) {
+            showMessage("يرجى إدخال اسم صحيح واختيار الدولة.");
             return;
         }
 
@@ -1120,9 +1555,7 @@ authForm.addEventListener("submit", async function(event) {
     submitBtn.textContent = "يرجى الانتظار...";
 
     try {
-
         if (mode === "register") {
-
             const name = document.getElementById("userName").value.trim();
             const age = Number(document.getElementById("userAge").value);
             const country = document.getElementById("userCountry").value;
@@ -1138,23 +1571,24 @@ authForm.addEventListener("submit", async function(event) {
             });
 
             /*
-             * نحاول حفظ بيانات الملف الشخصي.
-             * إذا فشل الحفظ، يبقى حساب Firebase موجوداً
-             * ويمكن للمستخدم إكمال بياناته بعد التحقق والدخول.
+             * حفظ الملف الخاص والعام.
+             * إذا فشل حفظ الملف العام يمكن إكماله لاحقاً
+             * عند تسجيل الدخول وحفظ الملف الشخصي.
              */
+            try {
+                await savePrivateProfile(
+                    result.user, name, age, country, true
+                );
+            } catch (profileError) {
+                console.error("Initial private profile save error:", profileError);
+            }
 
             try {
-                await setDoc(doc(db, "users", result.user.uid), {
-                    name: name,
-                    age: age,
-                    country: country,
-                    email: result.user.email,
-                    createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
-                });
-
-            } catch (profileError) {
-                console.error("Initial profile save error:", profileError);
+                await savePublicProfile(
+                    result.user, name, age, country, true
+                );
+            } catch (publicError) {
+                console.error("Initial public profile save error:", publicError);
             }
 
             await sendEmailVerification(result.user);
@@ -1167,7 +1601,6 @@ authForm.addEventListener("submit", async function(event) {
             authForm.reset();
 
         } else {
-
             const result = await signInWithEmailAndPassword(
                 auth,
                 email,
@@ -1179,33 +1612,40 @@ authForm.addEventListener("submit", async function(event) {
                     "يجب تأكيد بريدك الإلكتروني أولاً. تحقق من صندوق الوارد أو الرسائل غير المرغوب فيها."
                 );
 
-                await sendEmailVerification(result.user);
+                try {
+                    await sendEmailVerification(result.user);
+                } catch (verificationError) {
+                    console.error("Verification email error:", verificationError);
+                }
+
                 return;
             }
 
             closeAuth();
-            await loadUserProfile(result.user);
+
+            /*
+             * onAuthStateChanged يتولى فتح الملف الشخصي
+             * أو صفحة اكتشاف الأعضاء بعد تسجيل الدخول.
+             */
         }
 
     } catch (error) {
-
         showMessage(getFirebaseError(error));
 
     } finally {
-
         submitBtn.disabled = false;
         submitBtn.textContent =
             mode === "register" ? "إنشاء الحساب" : "دخول";
     }
-
 });
 
-/* متابعة حالة تسجيل الدخول عند فتح الموقع أو تحديث الصفحة */
+/* متابعة حالة تسجيل الدخول */
 
 onAuthStateChanged(auth, async function(user) {
     if (user && user.emailVerified) {
         await loadUserProfile(user);
     } else {
+        profileLoadId++;
         showHomePage();
     }
 });
@@ -1224,6 +1664,8 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+/* إتاحة الدوال للأزرار */
+
 window.openAuth = openAuth;
 window.closeAuth = closeAuth;
 window.switchAuth = switchAuth;
@@ -1234,4 +1676,4 @@ updateAuth();
 </script>
 
 </body>
-</html>
+    </html>
