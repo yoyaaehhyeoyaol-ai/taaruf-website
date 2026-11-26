@@ -404,6 +404,38 @@ footer p {
     color: #9de9bd;
 }
 
+/* صفحة الملف الشخصي */
+.profile-page {
+    display: none;
+    padding: 35px 6%;
+    min-height: 70vh;
+}
+
+.profile-card {
+    max-width: 600px;
+    margin: auto;
+    background: #202039;
+    border: 1px solid #373751;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.profile-card h2 {
+    text-align: center;
+    color: #b28aff;
+}
+
+.profile-desc {
+    text-align: center;
+    color: #aaaac0;
+    margin-bottom: 20px;
+}
+
+.profile-logout {
+    width: 100%;
+    margin-top: 12px;
+}
+
 @media(max-width: 700px) {
     .header {
         justify-content: space-between;
@@ -584,6 +616,68 @@ footer p {
     <p>© 2026 جميع الحقوق محفوظة</p>
 </footer>
 
+<!-- صفحة الملف الشخصي -->
+<section class="profile-page" id="profilePage">
+    <div class="profile-card">
+        <h2>ملفي الشخصي</h2>
+        <p class="profile-desc">
+            أهلاً بك في مجتمع تعارف
+        </p>
+
+        <div class="field">
+            <label for="profileName">الاسم</label>
+            <input id="profileName" type="text"
+                   maxlength="40" placeholder="اكتب اسمك">
+        </div>
+
+        <div class="field">
+            <label for="profileAge">العمر</label>
+            <input id="profileAge" type="number"
+                   min="18" max="100" placeholder="عمرك">
+        </div>
+
+        <div class="field">
+            <label for="profileCountry">الدولة</label>
+            <select id="profileCountry">
+                <option value="">اختر دولتك</option>
+                <option>اليمن</option>
+                <option>السعودية</option>
+                <option>مصر</option>
+                <option>الإمارات</option>
+                <option>الأردن</option>
+                <option>العراق</option>
+                <option>عمان</option>
+                <option>الكويت</option>
+                <option>قطر</option>
+                <option>البحرين</option>
+                <option>لبنان</option>
+                <option>سوريا</option>
+                <option>فلسطين</option>
+                <option>المغرب</option>
+                <option>الجزائر</option>
+                <option>تونس</option>
+                <option>ليبيا</option>
+                <option>السودان</option>
+                <option>موريتانيا</option>
+                <option>الصومال</option>
+                <option>جيبوتي</option>
+                <option>جزر القمر</option>
+            </select>
+        </div>
+
+        <button class="submit" id="saveProfileBtn" type="button">
+            حفظ الملف الشخصي
+        </button>
+
+        <button class="secondary-btn profile-logout"
+                type="button" onclick="logoutUser()">
+            تسجيل الخروج
+        </button>
+
+        <div class="message" id="profileMessage"></div>
+    </div>
+</section>
+
 <div class="modal" id="authModal">
 
     <div class="modal-box">
@@ -686,9 +780,20 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     updateProfile,
-    sendEmailVerification
+    sendEmailVerification,
+    signOut,
+    onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDo1nZdpiUsx3glVHUf3o0Yqfq9spZD4Gs",
@@ -701,11 +806,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 let mode = "register";
 
 const modal = document.getElementById("authModal");
 const authForm = document.getElementById("authForm");
+
+const profilePage = document.getElementById("profilePage");
+const profileName = document.getElementById("profileName");
+const profileAge = document.getElementById("profileAge");
+const profileCountry = document.getElementById("profileCountry");
+const profileMessage = document.getElementById("profileMessage");
+const saveProfileBtn = document.getElementById("saveProfileBtn");
 
 function showMessage(text, success = false) {
     const message = document.getElementById("message");
@@ -807,6 +920,161 @@ function getFirebaseError(error) {
     return errors[code] || "حدث خطأ: " + (error.message || code);
 }
 
+/* إظهار وإخفاء صفحات الموقع */
+
+function showProfilePage() {
+    document.querySelector(".header").style.display = "none";
+    document.querySelector(".hero").style.display = "none";
+    document.querySelector(".features").style.display = "none";
+    document.querySelector(".about").style.display = "none";
+    document.querySelector("footer").style.display = "none";
+
+    profilePage.style.display = "block";
+}
+
+function showHomePage() {
+    document.querySelector(".header").style.display = "";
+    document.querySelector(".hero").style.display = "";
+    document.querySelector(".features").style.display = "";
+    document.querySelector(".about").style.display = "";
+    document.querySelector("footer").style.display = "";
+
+    profilePage.style.display = "none";
+}
+
+/* تحميل الملف الشخصي من Firestore */
+
+async function loadUserProfile(user) {
+    showProfilePage();
+
+    profileMessage.textContent = "جارٍ تحميل بيانات الملف الشخصي...";
+    profileMessage.classList.remove("success");
+
+    try {
+        const profileRef = doc(db, "users", user.uid);
+        const profileSnapshot = await getDoc(profileRef);
+
+        if (profileSnapshot.exists()) {
+            const data = profileSnapshot.data();
+
+            profileName.value = data.name || user.displayName || "";
+            profileAge.value = data.age || "";
+            profileCountry.value = data.country || "";
+
+            profileMessage.textContent =
+                "يمكنك تعديل بياناتك ثم الضغط على حفظ.";
+
+        } else {
+            // الحسابات القديمة التي لم تحفظ بياناتها في Firestore
+            profileName.value = user.displayName || "";
+            profileAge.value = "";
+            profileCountry.value = "";
+
+            profileMessage.textContent =
+                "أكمل بيانات ملفك الشخصي ثم اضغط حفظ.";
+        }
+
+    } catch (error) {
+        console.error("Profile loading error:", error);
+
+        profileName.value = user.displayName || "";
+        profileAge.value = "";
+        profileCountry.value = "";
+
+        profileMessage.textContent =
+            "تعذر تحميل البيانات. يمكنك إدخال بياناتك ثم حفظها.";
+    }
+}
+
+/* حفظ أو تحديث الملف الشخصي */
+
+saveProfileBtn.addEventListener("click", async function() {
+    const user = auth.currentUser;
+
+    if (!user || !user.emailVerified) {
+        profileMessage.textContent =
+            "يرجى تسجيل الدخول والتحقق من البريد الإلكتروني أولاً.";
+        return;
+    }
+
+    const name = profileName.value.trim();
+    const age = Number(profileAge.value);
+    const country = profileCountry.value;
+
+    if (!name || name.length < 2) {
+        profileMessage.textContent = "يرجى إدخال اسم صحيح.";
+        return;
+    }
+
+    if (!Number.isInteger(age) || age < 18 || age > 100) {
+        profileMessage.textContent =
+            "العمر يجب أن يكون بين 18 و100 سنة.";
+        return;
+    }
+
+    if (!country) {
+        profileMessage.textContent = "يرجى اختيار الدولة.";
+        return;
+    }
+
+    saveProfileBtn.disabled = true;
+    saveProfileBtn.textContent = "جارٍ الحفظ...";
+
+    profileMessage.classList.remove("success");
+
+    try {
+        await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            age: age,
+            country: country,
+            email: user.email,
+            updatedAt: serverTimestamp()
+        }, {
+            merge: true
+        });
+
+        await updateProfile(user, {
+            displayName: name
+        });
+
+        profileMessage.textContent =
+            "تم حفظ ملفك الشخصي بنجاح.";
+        profileMessage.classList.add("success");
+
+    } catch (error) {
+        console.error("Profile save error:", error);
+
+        profileMessage.textContent =
+            "تعذر الحفظ. تحقق من اتصال الإنترنت وإعدادات Firestore.";
+        profileMessage.classList.remove("success");
+
+    } finally {
+        saveProfileBtn.disabled = false;
+        saveProfileBtn.textContent = "حفظ الملف الشخصي";
+    }
+});
+
+/* تسجيل الخروج */
+
+async function logoutUser() {
+    try {
+        await signOut(auth);
+        showHomePage();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    } catch (error) {
+        profileMessage.textContent = "تعذر تسجيل الخروج.";
+    }
+}
+
+window.logoutUser = logoutUser;
+
+/* التسجيل وتسجيل الدخول */
+
 authForm.addEventListener("submit", async function(event) {
 
     event.preventDefault();
@@ -856,6 +1124,8 @@ authForm.addEventListener("submit", async function(event) {
         if (mode === "register") {
 
             const name = document.getElementById("userName").value.trim();
+            const age = Number(document.getElementById("userAge").value);
+            const country = document.getElementById("userCountry").value;
 
             const result = await createUserWithEmailAndPassword(
                 auth,
@@ -866,6 +1136,26 @@ authForm.addEventListener("submit", async function(event) {
             await updateProfile(result.user, {
                 displayName: name
             });
+
+            /*
+             * نحاول حفظ بيانات الملف الشخصي.
+             * إذا فشل الحفظ، يبقى حساب Firebase موجوداً
+             * ويمكن للمستخدم إكمال بياناته بعد التحقق والدخول.
+             */
+
+            try {
+                await setDoc(doc(db, "users", result.user.uid), {
+                    name: name,
+                    age: age,
+                    country: country,
+                    email: result.user.email,
+                    createdAt: serverTimestamp(),
+                    updatedAt: serverTimestamp()
+                });
+
+            } catch (profileError) {
+                console.error("Initial profile save error:", profileError);
+            }
 
             await sendEmailVerification(result.user);
 
@@ -893,10 +1183,8 @@ authForm.addEventListener("submit", async function(event) {
                 return;
             }
 
-            showMessage(
-                "تم تسجيل الدخول بنجاح. أهلاً بك في تعارف!",
-                true
-            );
+            closeAuth();
+            await loadUserProfile(result.user);
         }
 
     } catch (error) {
@@ -911,6 +1199,18 @@ authForm.addEventListener("submit", async function(event) {
     }
 
 });
+
+/* متابعة حالة تسجيل الدخول عند فتح الموقع أو تحديث الصفحة */
+
+onAuthStateChanged(auth, async function(user) {
+    if (user && user.emailVerified) {
+        await loadUserProfile(user);
+    } else {
+        showHomePage();
+    }
+});
+
+/* إغلاق نافذة التسجيل */
 
 modal.addEventListener("click", function(event) {
     if (event.target === modal) {
